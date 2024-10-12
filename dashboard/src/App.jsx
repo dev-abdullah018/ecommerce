@@ -1,11 +1,11 @@
+import { React, useState } from "react";
+import publickRoutes from "./route/routes/pablicRoutes";
+import Router from "./route/Router";
 
 function App() {
+  let [allRoutes, setAllRoutes] = useState([...publickRoutes]);
 
-  return (
-    <>
-      <h1>One </h1>
-    </>
-  )
+  return <Router allRoutes={allRoutes} />;
 }
 
-export default App
+export default App;
