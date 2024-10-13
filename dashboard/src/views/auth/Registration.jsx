@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 
 const Registration = () => {
+  let [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  let handleInputChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  
+  };
+
+  let handleFormSubmit = (e)=>{
+    e.preventDefault()
+    console.log(data);
+    
+  }
+
   return (
     <div className="min-w-fit min-h-screen bg-[#A435F0] flex justify-center items-center">
       <div className="w-[350px] p-2">
@@ -12,12 +32,13 @@ const Registration = () => {
             Please register your account
           </p>
 
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="name" className="text-sm">
                 Name
               </label>
               <input
+                onChange={handleInputChange}
                 className="px-3 py-2 outline-none border border-slate-200 bg-transparent rounded-md"
                 type="text"
                 name="name"
@@ -30,6 +51,7 @@ const Registration = () => {
                 Email
               </label>
               <input
+                onChange={handleInputChange}
                 className="px-3 py-2 outline-none border border-slate-200 bg-transparent rounded-md"
                 type="email"
                 name="email"
@@ -42,6 +64,7 @@ const Registration = () => {
                 Password
               </label>
               <input
+                onChange={handleInputChange}
                 className="px-3 py-2 outline-none border border-slate-200 bg-transparent rounded-md"
                 type="password"
                 name="password"
@@ -89,11 +112,10 @@ const Registration = () => {
             </div>
             <div className="w-[135px] h-[35px] flex rounded-md bg-blue-500 hover:bg-blue-400 cursor-pointer justify-center items-center overflow-hidden text-white">
               <span>
-              <FaFacebookF />
+                <FaFacebookF />
               </span>
             </div>
           </div>
-
         </div>
       </div>
     </div>
