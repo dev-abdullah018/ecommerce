@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaGoogle, FaFacebookF } from "react-icons/fa";
 
 const Registration = () => {
   return (
@@ -70,15 +71,29 @@ const Registration = () => {
                 Already Have an Account? <Link to="/login">Sign In</Link>
               </p>
             </div>
-
-            <div className="w-full flex justify-center items-center mb-3">
-                <div className="w-[45%] bg-slate-200 h-[1px]"></div>
-                <div className="w-[10%] flex justify-center items-center">
-                  <span className="pb-1">Or</span>
-                </div>
-                <div className="w-[45%] bg-slate-200 h-[1px]"></div>
-            </div>
           </form>
+
+          <div className="w-full flex justify-center items-center mb-3">
+            <div className="w-[45%] bg-slate-200 h-[1px]"></div>
+            <div className="w-[10%] flex justify-center items-center">
+              <span className="pb-1">Or</span>
+            </div>
+            <div className="w-[45%] bg-slate-200 h-[1px]"></div>
+          </div>
+
+          <div className="flex justify-center items-center gap-3">
+            <div className="w-[135px] h-[35px] flex rounded-md bg-red-500 hover:bg-red-400 cursor-pointer justify-center items-center overflow-hidden text-white">
+              <span>
+                <FaGoogle />
+              </span>
+            </div>
+            <div className="w-[135px] h-[35px] flex rounded-md bg-blue-500 hover:bg-blue-400 cursor-pointer justify-center items-center overflow-hidden text-white">
+              <span>
+              <FaFacebookF />
+              </span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
