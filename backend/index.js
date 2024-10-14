@@ -1,18 +1,22 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const authRoutes = require("./routes/authRoutes")
+require("dotenv").config();
+const express = require("express");
+const app = express();
+const authRoutes = require("./routes/authRoutes");
+const cors = require("cors");
 
-let port = process.env.PORT
+app.use(cors({
+    origin: ["http://localhost:5173"]
+}))
 
-app.use(express.json())
-app.use("/api", authRoutes)
+let port = process.env.PORT;
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+app.use(express.json());
+app.use("/api", authRoutes);
 
-app.listen(port, function(){
-    console.log(`Port is running on ${port}`);
-    
-})
+app.get("/", function (req, res) {
+  res.send("Hello World");
+});
+
+app.listen(port, function () {
+  console.log(`Port is running on ${port}`);
+});
