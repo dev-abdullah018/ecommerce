@@ -5,6 +5,7 @@ const authRoutes = require("./routes/authRoutes")
 
 let port = process.env.PORT
 
+app.use(express.json())
 app.use("/api", authRoutes)
 
 app.get('/', function (req, res) {
