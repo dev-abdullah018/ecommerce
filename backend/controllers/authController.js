@@ -18,8 +18,10 @@ const authController = async (req,res) =>{
             id: admin._id,
             role: admin.role
            })
-           console.log("token" , token);
-           
+           res.cookie("accessToken", token,{
+            expires: new Date(Date.now() + 7*24*60*60*1000)
+           })
+           responseReturn(res, 200, {message: "Login Successful"})
          }else{
             responseReturn(res, 404, {error: "Password not matched!"})
          }

@@ -6,7 +6,8 @@ const cors = require("cors");
 const { dbConnection } = require("./utils/dbConnection");
 
 app.use(cors({
-    origin: ["http://localhost:5173"]
+    origin: ["http://localhost:5173"],
+    credentials: true
 }))
 
 let port = process.env.PORT;

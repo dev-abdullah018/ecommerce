@@ -7,7 +7,9 @@ export let admin_login = createAsyncThunk(
         console.log("adminInfo from reducer", adminInfo);
         
         try {
-            let {data} = await api.post("/admin-login", adminInfo)
+            let {data} = await api.post("/admin-login", adminInfo, {withCredentials: true})
+            console.log(data);
+            
             
         } catch (error) {
             console.log(error);
