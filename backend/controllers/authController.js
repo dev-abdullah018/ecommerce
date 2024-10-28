@@ -8,7 +8,7 @@ const authController = async (req,res) =>{
        const admin = await adminModel.findOne({email: email})
        
        if(admin){
-
+         
        }else{
         responseReturn(res, 404, {error: "Email not found!"})
        }
