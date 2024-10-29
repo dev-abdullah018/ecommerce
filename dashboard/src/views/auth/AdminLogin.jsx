@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { admin_login } from "../../store/reducers/authReducer";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { admin_login, clearMessage } from "../../store/reducers/authReducer";
+import ClockLoader from "react-spinners/ClockLoader";
+import toast from 'react-hot-toast';
 
 const AdminLogin = () => {
-
-  let dispatch = useDispatch()
+  let dispatch = useDispatch();
+  const { loader, errorMessage } = useSelector((state) => state.auth);
 
   let [data, setData] = useState({
     email: "",
@@ -21,8 +23,15 @@ const AdminLogin = () => {
   let handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    dispatch(admin_login(data))
+    dispatch(admin_login(data));
   };
+
+  useEffect(()=>{
+    if(errorMessage){
+      toast.error(errorMessage)
+      dispatch(clearMessage)
+    }
+  },[])
 
   return (
     <div className="min-w-fit min-h-screen bg-[#A435F0] flex justify-center items-center">
@@ -61,8 +70,11 @@ const AdminLogin = () => {
                 required
               />
             </div>
-            <button className="bg-[#A435F0] w-full hover:bg-[#ae4eed] text-white rounded-md px-7 py-2 mb-3">
-              Login
+            <button
+              disabled={loader ? true : false}
+              className="bg-[#A435F0] w-full hover:bg-[#ae4eed] text-white rounded-md px-7 py-2 mb-3 disabled:bg-[#EBEBE4]"
+            >
+              {loader ? <ClockLoader size={20} color="#c5afaf" /> : "Login"}
             </button>
           </form>
         </div>
