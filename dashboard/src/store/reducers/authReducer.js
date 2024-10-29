@@ -12,7 +12,7 @@ export let admin_login = createAsyncThunk(
       });
       return fulfillWithValue(data);
     } catch (error) {
-      rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -28,21 +28,26 @@ export const authReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    clearMessage: (state, action)=>{
-        state.errorMessage = ""
-    }
+    clearMessage: (state, action) => {
+      state.errorMessage = "";
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(admin_login.pending, (state, { payload }) => {
-        state.loader = true;
-      })
-      .addCase(admin_login.rejected, (state, { payload }) => {
-        (state.loader = false), (state.errorMessage = payload.error);
-      });
+    .addCase(admin_login.pending, (state) => {
+      state.loader = true;
+    })
+    .addCase(admin_login.fulfilled, (state, { payload }) => {
+      state.loader = false;
+      state.successMessage = payload.message;
+    })
+    .addCase(admin_login.rejected, (state, { payload }) => {
+      state.loader = false;
+      state.errorMessage = payload.error;
+    });
   },
 });
 
-export const {clearMessage} = authReducer.actions
+export const { clearMessage } = authReducer.actions;
 
 export default authReducer.reducer;

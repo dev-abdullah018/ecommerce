@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const AdminLogin = () => {
   let dispatch = useDispatch();
-  const { loader, errorMessage } = useSelector((state) => state.auth);
+  const { loader, errorMessage, successMessage } = useSelector((state) => state.auth);
 
   let [data, setData] = useState({
     email: "",
@@ -26,12 +26,16 @@ const AdminLogin = () => {
     dispatch(admin_login(data));
   };
 
-  useEffect(()=>{
-    if(errorMessage){
-      toast.error(errorMessage)
-      dispatch(clearMessage)
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(clearMessage());
     }
-  },[])
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(clearMessage());
+    }
+  }, [errorMessage, successMessage, dispatch]);
 
   return (
     <div className="min-w-fit min-h-screen bg-[#A435F0] flex justify-center items-center">
